@@ -1,11 +1,6 @@
-#!/usr/bin/env python
-from __future__ import print_function
-
 import argparse
 import skimage as skimage
 from skimage import transform, color, exposure
-from skimage.transform import rotate
-from skimage.viewer import ImageViewer
 import sys
 sys.path.append("game/")
 import wrapped_flappy_bird as game
@@ -14,7 +9,6 @@ import numpy as np
 from collections import deque
 
 import json
-from keras.models import model_from_json
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 from keras.optimizers import SGD , Adam
@@ -56,7 +50,7 @@ def buildmodel():
     print("We finish building the model")
     return model
 
-def trainNetwork(model,args):
+def trainNetwork(model, args):
     # open up a game state to communicate with emulator
     game_state = game.GameState()
 
@@ -75,12 +69,10 @@ def trainNetwork(model,args):
     x_t = x_t / 255.0
 
     s_t = np.stack((x_t, x_t, x_t, x_t), axis=2)
-    #print (s_t.shape)
-
+    # print (s_t.shape)
+    
     #In Keras, need to reshape
     s_t = s_t.reshape(1, s_t.shape[0], s_t.shape[1], s_t.shape[2])  #1*80*80*4
-
-    
 
     if args['mode'] == 'Run':
         OBSERVE = 999999999    #We keep observe, never train
