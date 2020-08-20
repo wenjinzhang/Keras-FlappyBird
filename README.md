@@ -5,7 +5,7 @@
 * Python 3.6
 * Keras
 * pygame
-* tensofflow
+* tensorflow
 * scikit-image
 
 # How to Run?
